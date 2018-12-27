@@ -34,21 +34,15 @@ import javax.inject.Inject
  */
 class SearchDataManager @Inject constructor(
     context: Context,
-    onDataLoadedCallback: BaseDataManager.OnDataLoadedCallback<List<PlaidItem>>,
     private val shotsRepository: ShotsRepository
 ) : BaseDataManager<List<PlaidItem>>(), LoadSourceCallback {
 
-    private val searchStories: SearchStoriesUseCase
+    private val searchStories: SearchStoriesUseCase = provideSearchStoriesUseCase(context)
 
     // state
     var query = ""
         private set
     private var page = 1
-
-    init {
-        setOnDataLoadedCallback(onDataLoadedCallback)
-        searchStories = provideSearchStoriesUseCase(context)
-    }
 
     fun searchFor(newQuery: String) {
         if (query != newQuery) {
@@ -88,8 +82,10 @@ class SearchDataManager @Inject constructor(
             if (result is Result.Success<*>) {
                 val shots = (result as Result.Success<List<Shot>>).data
                 BaseDataManager.setPage(shots, resultsPage)
-                BaseDataManager.setDataSource(shots,
-                        Source.DribbbleSearchSource.DRIBBBLE_QUERY_PREFIX + query)
+                BaseDataManager.setDataSource(
+                    shots,
+                    Source.DribbbleSearchSource.DRIBBBLE_QUERY_PREFIX + query
+                )
                 onDataLoaded(shots)
             }
             return@search
@@ -100,8 +96,10 @@ class SearchDataManager @Inject constructor(
         loadFinished()
         if (result != null) {
             BaseDataManager.setPage(result, page)
-            BaseDataManager.setDataSource(result,
-                    Source.DesignerNewsSearchSource.DESIGNER_NEWS_QUERY_PREFIX + query)
+            BaseDataManager.setDataSource(
+                result,
+                Source.DesignerNewsSearchSource.DESIGNER_NEWS_QUERY_PREFIX + query
+            )
             onDataLoaded(result)
         }
     }

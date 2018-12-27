@@ -45,7 +45,9 @@ public abstract class BaseDataManager<T> implements DataLoadingSubject {
     }
 
     public final void onDataLoaded(T data) {
-        onDataLoadedCallback.onDataLoaded(data);
+        if (onDataLoadedCallback != null) {
+            onDataLoadedCallback.onDataLoaded(data);
+        }
     }
 
     public abstract void cancelLoading();

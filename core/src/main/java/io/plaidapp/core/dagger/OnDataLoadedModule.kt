@@ -25,7 +25,7 @@ import io.plaidapp.core.data.PlaidItem
  * Module to provide [BaseDataManager.OnDataLoadedCallback].
  */
 @Module class OnDataLoadedModule(
-    private val callback: BaseDataManager.OnDataLoadedCallback<List<PlaidItem>>
+    private val callback: BaseDataManager.OnDataLoadedCallback<List<PlaidItem>>?
 ) {
 
     @Provides

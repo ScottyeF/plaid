@@ -39,7 +39,7 @@ class DataManagerModule {
 
     @Provides
     fun provideDataManager(
-        onDataLoadedCallback: BaseDataManager.OnDataLoadedCallback<List<PlaidItem>>,
+        onDataLoadedCallback: BaseDataManager.OnDataLoadedCallback<List<PlaidItem>>?,
         loadStoriesUseCase: LoadStoriesUseCase,
         searchStoriesUseCase: SearchStoriesUseCase,
         shotsRepository: ShotsRepository,
@@ -54,7 +54,7 @@ class DataManagerModule {
 
     @Provides
     fun provideDataLoadingSubject(
-        onDataLoadedCallback: BaseDataManager.OnDataLoadedCallback<List<PlaidItem>>,
+        onDataLoadedCallback: BaseDataManager.OnDataLoadedCallback<List<PlaidItem>>?,
         loadStoriesUseCase: LoadStoriesUseCase,
         searchStoriesUseCase: SearchStoriesUseCase,
         shotsRepository: ShotsRepository,
@@ -68,7 +68,7 @@ class DataManagerModule {
     )
 
     private fun getDataManager(
-        onDataLoadedCallback: BaseDataManager.OnDataLoadedCallback<List<PlaidItem>>,
+        onDataLoadedCallback: BaseDataManager.OnDataLoadedCallback<List<PlaidItem>>?,
         loadStoriesUseCase: LoadStoriesUseCase,
         searchStoriesUseCase: SearchStoriesUseCase,
         shotsRepository: ShotsRepository,
